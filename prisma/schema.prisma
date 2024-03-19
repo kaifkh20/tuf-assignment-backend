@@ -1,0 +1,26 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model SourceCode {
+  id           Int         @id @default(autoincrement())
+  sourceCode   Bytes
+  Submission   Submission? @relation(fields: [submissionId], references: [id])
+  submissionId Int?
+}
+
+model Submission {
+  id           Int          @id @default(autoincrement())
+  username     String
+  codeLanguage String
+  stdInput     String
+  sourceCode   SourceCode[]
+  submissionToken String
+  submissionOutput String? 
+  submissionTimeStamp   DateTime
+}

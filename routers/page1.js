@@ -10,10 +10,10 @@ const prisma = new PrismaClient()
 // await client.connect()
 
 const languageId = {
-    "cpp" : 54,
-    "java" : 62,
-    "javascript" : 63,
-    "python" : 71
+    "C++" : 54,
+    "Java" : 62,
+    "JavaScript" : 63,
+    "Python" : 71
 }
 
 const API_KEY = process.env.API_KEY
@@ -61,8 +61,8 @@ async function createSubmission(codeLanguage,sourceCode,stdInput){
 }
 
 async function getSubmissionDetails(submissionToken){
-    const apiKey = API_KEY; // Replace with your actual key
-    const submissionId = submissionToken; // Replace with your actual submission ID
+
+    const submissionId = submissionToken; 
 
     const url = `https://judge0-ce.p.rapidapi.com/submissions/${submissionId}`;
 
@@ -102,6 +102,7 @@ async function getSubmissionDetails(submissionToken){
         return data.stderr
 
     } catch (error) {
+        return new Error(error)
         console.error(error);
     }
 

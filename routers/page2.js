@@ -22,6 +22,9 @@ function convertToString(data){
 
 page2.get("/data",async(req,res)=>{
     const submissions = await prisma.submission.findMany({
+        orderBy:{
+            id : "desc"
+        },
         include : {
             sourceCode : true
         }
@@ -30,12 +33,6 @@ page2.get("/data",async(req,res)=>{
         submission.sourceCode = convertToString(submission.sourceCode[0].sourceCode)
         submission.submissionTimeStamp = submission.submissionTimeStamp.toLocaleString()
     })
-
-    // submission.sourceCode = submission.sourceCode[0].sourceCode
-
-    // await client.set("data_array",JSON.stringify(submissions)) 
-
-    // console.log( JSON.parse( await client.get("data_array")));
 
     res.json(submissions)
 })

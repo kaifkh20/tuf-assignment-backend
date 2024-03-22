@@ -150,7 +150,6 @@ page1.post("/form",async(req,res)=>{
 
         
         if(submissionOutput===null){
-            setTimeout(async()=>{
 
                 const submissionOutput = await getSubmissionDetails(submissionToken)
     
@@ -164,7 +163,6 @@ page1.post("/form",async(req,res)=>{
                 })
     
                 // console.log(submissionOutput);
-            },3000)
         }
 
         res.status(200).send(submission)
